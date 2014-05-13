@@ -1,0 +1,5 @@
+# Ignore LaTeX outputs
+*.dvi
+*.pdf
+*.log
+*.aux
