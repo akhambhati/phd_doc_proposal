@@ -219,7 +219,7 @@
 % The format of the abstract heading
 \def\@abstractpage{\addcontentsline{toc}{chapter}{Abstract}%
   \begin{center}
-    {\large\bf ABSTRACT} \vskip 0.4in
+      \large{\textbf{ABSTRACT}} \vskip 0.4in
     \MakeUppercase{\@title} \vskip 0.4in
     \@author \\
     \@supervisor
@@ -230,7 +230,7 @@
 % The format of the specific aims heading
 \def\@aimspage{\addcontentsline{toc}{chapter}{Specific Aims}%
   \begin{center}
-    {\large\bf SPECIFIC AIMS}
+      \large{\textbf{SPECIFIC AIMS}}
   \end{center}
   \vskip 10pt
   \par\noindent \@aims }
