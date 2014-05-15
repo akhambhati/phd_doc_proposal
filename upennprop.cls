@@ -9,7 +9,7 @@
 %   Most report class options; no additional ones.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{upenndiss}[2000/5/24 U. Penn Dissertation Class for LaTeX2e]
+\ProvidesClass{upennprop}[2000/5/24 U. Penn Dissertation Class for LaTeX2e]
 
 % The default point size is 12pt, not 10pt.
 % Otherwise the mandated margins result in lines that are much too long
@@ -33,6 +33,11 @@
 % Invoke the parent class with appropriate font size (default 12pt).
 % Options given to \PassOptionsToClass above are implicitly passed.
 \LoadClass[\@sizeopt]{report}
+\usepackage[colorlinks=True,
+            linkcolor=blue,
+            urlcolor=blue,
+            citecolor=blue,
+            anchorcolor=blue]{hyperref}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -43,21 +48,21 @@
 % this style file to other dissertation specifications.
 %
 
-% Dissertation margins (based on U.S. Letter paper):
+% For letter-size paper: 8.5 in x 11 in
+% Latex Origin is 1''/1'', so measurements are relative to this.
+% Proposal Margins: 1in inside, outside, top, bottom
 
-% Margins: 1.5in inside margin, 1in outside, top, bottom
 \textwidth=6in
-\oddsidemargin=0.5in \evensidemargin=0.5in  
+\oddsidemargin=0.5in \evensidemargin=0.5in
 \topmargin=-0.5in
 \textheight=9in  % 9in must include page numbers
 \advance\textheight by -1\footskip \relax
+%\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
 
 \usepackage{setspace}
-\doublespacing
+%\doublespacing
 
 %%%% Content of text labels; can be overridden from document preamble  %%%%
-\def\acknowledgementsname{Acknowledgements}
-\def\prefacename{Preface}
 
 % Position titles given with the signatures on the title page
 \def\supervisorname{Supervisor of Dissertation}
@@ -82,12 +87,14 @@
 % are obligatory!
 
 \def\department#1{\gdef\@department{#1}}
+\def\school#1{\gdef\@school{#1}}
 \def\supervisor#1{\gdef\@supervisor{#1}} % Separate joint supervisors with \and
 %\def\abstractsupervisor#1{\gdef\@supervisorAbstract{#1}} -- KG
 \let\superviser=\supervisor 
 \let\advisor=\supervisor
 \let\supervisors=\supervisor
 \let\supervisers=\supervisor
+
 
 % The Penn linguistics department lists committee names,
 % so here they are; (optional command)
@@ -100,28 +107,12 @@
 \copyrightyear{\number\year}         % may be overridden in the document
 
 
-% Except maybe for \dedication, the following are typically too long to
-% appear as in-line commands, so they are not defined as \long
-% to encourage the use of separate files.
-% Example: \dedication{blah, blah} OR \dedicationfile{Dedication}
-
-% The dedication is vertically centered on the page, and otherwise
-% formatted by the author
-\long\def\dedication#1{%
-    \long\def\@dedication{{\null\vfil\parindent=0pt\relax #1\par}}}
-\def\acknowledgements#1{%
-    \def\@acknowledgements{\PreSection{\acknowledgementsname} #1}}
 \def\abstract#1{\def\@abstract{#1}}
-\def\preface#1{\def\@preface{\PreSection{\prefacename} #1}}
 
 % Contrive to \include a file without starting a new page (by temporarily
 % disabling \clearpage).  A new page is still begun at the end of the include.
 \def\@includehere#1{\bgroup\let\clearpage=\egroup\include{#1}}
-
-\def\dedicationfile#1{\dedication{\@includehere{#1}}}
 \def\abstractfile#1{\abstract{\@includehere{#1}}}
-\def\acknowledgementsfile#1{\acknowledgements{\@includehere{#1}}}
-\def\prefacefile#1{\preface{\@includehere{#1}}}
 
 % The format and order of the preliminary pages.
 % Optional pages are only created if requested.
@@ -140,23 +131,15 @@
   \pagenumbering{roman}\pagestyle{plain}%
   \@titlepage 
   \ifcopyright \@copyrightpage \fi 
-  \@ifundefined{@dedication} \relax
-      {\@dedication \newpage \let\@dedication=\@undefined}%
-  \@ifundefined{@acknowledgements} \relax
-      {\@acknowledgements \newpage \let\@acknowledgements=\@undefined}%
   % The abstract and TOC are obligatory
   \@abstractpage \newpage \let\@abstract=\@undefined
   \tableofcontents
   \@ifundefined{pd@list@tables} \relax 
       \listoftables 
-%c:   Now done automatically
-%c    {\addcontentsline{toc}{chapter}{\listtablename}\listoftables}%
   \@ifundefined{pd@list@figures} \relax 
       \listoffigures
-%c    {\addcontentsline{toc}{chapter}{\listfigurename}\listoffigures}%
-  \@ifundefined{@preface} \relax 
-      {\@preface \newpage \let\@preface=\@undefined}%
-  \@ifstar{}{\MainMatter}}
+  \@ifstar{}{\MainMatter}
+}
 
 
 % Start the regularly-numbered part of the dissertation.  Must be given
@@ -173,83 +156,61 @@
   \thispagestyle{empty}\enlargethispage{\the\footskip}%
   \null\vskip.1in%
   \begin{center}
-%	{\setstretch{2.5} \uppercase\expandafter{\@title}\par }%
-	{\setstretch{1.5} \MakeUppercase{\@title}\par }%
-	\vskip.2in
-	\@author
-	\vskip .2in
-	A DISSERTATION \\[.1in]
-	in \\[.1in]
-	\@department \\[.1in]
-	\vfill
-Presented to the Faculties of the University of Pennsylvania in Partial \\
-Fulfillment of the Requirements for the Degree of Doctor of Philosophy
-\\[.1in]
-	\@copyrightyear
+      {\setstretch{1.5} \textsc{\large{\@title}}\par }%
+      \vskip.4in
+      \@author
+      \vskip .4in
+      A DISSERTATION PROPOSAL in \\[.2in]
+      \@department, \@school \\[.2in]
+      \@copyrightyear
+      \bgroup \parindent=0pt \par \@signatureblock \egroup
   \end{center}
-  \bgroup \parindent=0pt \par \@signatureblock \egroup
+
   \newpage}
 % (There is no point to making ``University of Pennsylvania'' a macro: other
 % schools are sure to have a different format for the title page anyway).
 
 
 % Format the signatures at the bottom of the title page.
-
-\def\@signatureblock{\vskip 0pt plus 0.5 fill
-  % Count the total of signatures needed (total names in \@supervisor,
-  % \@committee, and \@approvedby)
-  \global\@tempcnta=0 
-  \@count@names\@tempcnta\@supervisor
-  \@count@names\@tempcnta\@committee
-  \global\advance\@tempcnta by 1 \relax % for the grad chair or approver
-  % Choose mode: one or two columns of signatures (laid out row by row)
-  % Then generate the signatures in the desired order 
-  \ifnum\@tempcnta < 4
-    \let\@eachsig=\@widesig
-    \@siglist\@supervisor\supervisorname
-    \@siglist\@committee\committeemembername
-    \@siglist\@approvedby\approvedname
-  \else 
-    \let\@eachsig=\@narrowsig
-    \@siglist\@supervisor\supervisorname %-- KG
-    \@siglist\@committee\committeemembername %-- KG
-    \@siglist\@approvedby\approvedname %-- KG
-  \fi }
-
 % If the default signature layout is inappropriate, just override it:
 % Redefine \@signatureblock and lay out the names by hand, either using
 % \@widesig and/or \@narrowsig, or just drawing lines in your favorite way.
 % Example:
-\renewcommand\@signatureblock{\vskip 0pt plus 0.5 fill
-    \@supervisorsig{Charles Yang \\ Associate Professor, Linguistics \& Computer and Information Science} 
-    \@chairpersonsig{Robin L. Clark \\ Associate Professor, Linguistics}
-    \@thicksig{Dissertation Committee}
-    \@narrowsig{Stephen R. Anderson \\ Dorothy R. Diebold Professor, Linguistics, Psychology, \& Cognitive Science, Yale University}
-    \@narrowsig{Mark Yoffe Liberman \\ Trustee Professor of Phonetics, Linguistics \& Computer and Information Science}
-    \@narrowsig{Eugene Buckley \\ Associate Professor, Linguistics}
-    \hspace{.45in}
-    \@narrowsig{Rolf Noyer \\ Associate Professor, Linguistics}
+\def\@signatureblock{\vskip 0pt plus 0.5 fill
+    \@supervisorsig{Brian Litt \vskip 0.1in Professor of \\ Neurology \& Bioengineering}
+    \@chairpersonsig{Daniel A. Hammer \vskip 0.1in Alfred G. and Meta A. Ennis Professor of \\ Bioengineering \& Chemical and Biomolecular Engineering}
+    \@narrowsig{Gershon Buchsbaum, Professor of Bioengineering, University of Pennsylvania \\
+                Danielle S. Bassett, Skirkanich Assistant Professor of Innovation of Bioengineering \& Electrical and Systems Engineering, University of Pennsylvania}
+    \@contactsig{Supervisor Contact}{Brian Litt, M.D. \\ 301 Hayden Hall, University of Pennsylvania \\ 3320 Smith Walk, Philadelphia, PA 19104 \\ \href{mailto:littb@mail.med.upenn.edu}{littb@mail.med.upenn.edu}}
+    \@contactsig{Personal Contact}{Ankit Khambhati \\ 301 Hayden Hall, University of Pennsylvania \\ 3320 Smith Walk, Philadelphia, PA 19104 \\ \href{mailto:ankk@seas.upenn.edu}{ankk@seas.upenn.edu}}
 }
 
-\def\@narrowsig#1{\parbox[t]{7cm}{\parindent=0pt \vskip 0.25in
-    \raggedright
-    \par \vskip .1in #1}\hfill}
+\def\@narrowsig#1{\parbox[t]{\textwidth}{\parindent=0pt \vskip 0.25in
+    \flushleft
+    \par \vskip .1in \footnotesize{\underline{Dissertation Committee}}
+    \par \vskip .1in \footnotesize{#1}}\hfill}
 
-\def\@thicksig#1{\parbox[t]{\textwidth}{\parindent=0pt \vskip 0.25in
-    \raggedright
-    \par \vskip .1in #1}\hfill}
+\def\@contactsig#1#2{\parbox[t]{7cm}{\parindent=0pt \vskip 0.25in
+    \flushleft
+    \par \vskip .1in \footnotesize{\underline{#1}}
+    \par \vskip .1in \footnotesize{#2}}\hfill}
 
-\def\@supervisorsig#1{\parbox[t]{7cm}{\parindent=0pt \vskip 0.25in
-  \raggedright
-  \par \vskip .1in Supervisor of Dissertation
-  \par \vskip \baselineskip \hrule width 6cm
-  \par \vskip .1in #1}\hfill}
 
-\def\@chairpersonsig#1{\parbox[t]{7cm}{\parindent=0pt \vskip 0.25in
-  \raggedright
-  \par \vskip .1in Graduate Group Chairperson
-  \par \vskip \baselineskip \hrule width 6cm
-  \par \vskip .1in #1}\hfill}
+\def\@supervisorsig#1{\parbox[t][4cm][t]{7cm}{\parindent=0pt \vskip 0.25in
+  \flushright
+  \par \vskip \baselineskip \hrule
+  \par \vskip .1in \footnotesize{#1}
+  \vfill
+  \par \vskip .1in Supervisor of Dissertation}\hfill}
+
+
+\def\@chairpersonsig#1{\parbox[t][4cm][t]{7cm}{\parindent=0pt \vskip 0.25in
+  \flushright
+  \par \vskip \baselineskip \hrule
+  \par \vskip .1in \footnotesize{#1}
+  \vfill
+  \par \vskip .1in Graduate Group Chairperson}\hfill}
+
 
 % Do a sig line for each name in the list #1, with title #2
 % The output is formatted in the format Name, Title (you can change it here)
@@ -275,17 +236,21 @@ Fulfillment of the Requirements for the Degree of Doctor of Philosophy
 % The format of the abstract heading
 \def\@abstractpage{\addcontentsline{toc}{chapter}{Abstract}%
   \begin{center}
-    {\large\bf ABSTRACT} \\[6pt]
-    \MakeUppercase{\@title} \\[4pt]
-%    Author: \@author \\[4pt]
-    \@author \\[4pt]
-    \def\and{and }%
-    %\global\@tempcnta=0 \@count@names\@tempcnta\@supervisorAbstract -- KG
-    %\ifnum \@tempcnta > 1 Supervisors: \else Supervisor: \fi \@supervisorAbstract -- KG
-    \@supervisor % -- KG
+    {\large\bf ABSTRACT} \vskip 0.4in
+    \MakeUppercase{\@title} \vskip 0.4in
+    \@author \\
+    \@supervisor
   \end{center}
   \vskip 10pt
   \par\noindent \@abstract }
+
+% The TOC Formatting
+\renewcommand*{\contentsname}{Table of Contents}
+
+% List of figs and tables formatting
+\renewcommand*{\listfigurename}{List of figures}
+\renewcommand*{\listtablename}{List of tables}
+
 
 
 
