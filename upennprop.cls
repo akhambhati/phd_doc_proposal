@@ -66,8 +66,7 @@
 
 % Position titles given with the signatures on the title page
 \def\supervisorname{Supervisor of Dissertation}
-\def\approvedname{Graduate Group Chair}
-\def\committeemembername{Committee Member}
+\def\chairname{Graduate Group Chair}
 
 % Select one in your document: \copyrighttrue or \copyrightfalse
 % Controls whether to create a copyright page.
@@ -89,30 +88,22 @@
 \def\department#1{\gdef\@department{#1}}
 \def\school#1{\gdef\@school{#1}}
 \def\supervisor#1{\gdef\@supervisor{#1}} % Separate joint supervisors with \and
-%\def\abstractsupervisor#1{\gdef\@supervisorAbstract{#1}} -- KG
 \let\superviser=\supervisor 
 \let\advisor=\supervisor
 \let\supervisors=\supervisor
 \let\supervisers=\supervisor
 
-
-% The Penn linguistics department lists committee names,
-% so here they are; (optional command)
-\def\committee#1{\gdef\@committee{#1}} % Separate committee members with \and
-
-\def\approvedby#1{\gdef\@approvedby{#1}}
-\let\gradchair=\approvedby
-
 \def\copyrightyear#1{\gdef\@copyrightyear{#1}}  
 \copyrightyear{\number\year}         % may be overridden in the document
 
-
 \def\abstract#1{\def\@abstract{#1}}
+\def\aims#1{\def\@aims{#1}}
 
 % Contrive to \include a file without starting a new page (by temporarily
 % disabling \clearpage).  A new page is still begun at the end of the include.
 \def\@includehere#1{\bgroup\let\clearpage=\egroup\include{#1}}
 \def\abstractfile#1{\abstract{\@includehere{#1}}}
+\def\aimsfile#1{\aims{\@includehere{#1}}}
 
 % The format and order of the preliminary pages.
 % Optional pages are only created if requested.
@@ -133,6 +124,7 @@
   \ifcopyright \@copyrightpage \fi 
   % The abstract and TOC are obligatory
   \@abstractpage \newpage \let\@abstract=\@undefined
+  \@aimspage \newpage \let\@aimspage=\@undefined
   \tableofcontents
   \@ifundefined{pd@list@tables} \relax 
       \listoftables 
@@ -177,8 +169,8 @@
 % \@widesig and/or \@narrowsig, or just drawing lines in your favorite way.
 % Example:
 \def\@signatureblock{\vskip 0pt plus 0.5 fill
-    \@supervisorsig{Brian Litt \vskip 0.1in Professor of \\ Neurology \& Bioengineering}
-    \@chairpersonsig{Daniel A. Hammer \vskip 0.1in Alfred G. and Meta A. Ennis Professor of \\ Bioengineering \& Chemical and Biomolecular Engineering}
+    \@mainsig{\supervisorname}{Brian Litt \vskip 0.1in Professor of \\ Neurology \& Bioengineering}
+    \@mainsig{\chairname}{Daniel A. Hammer \vskip 0.1in Alfred G. and Meta A. Ennis Professor of \\ Bioengineering \& Chemical and Biomolecular Engineering}
     \@narrowsig{Gershon Buchsbaum, Professor of Bioengineering, University of Pennsylvania \\
                 Danielle S. Bassett, Skirkanich Assistant Professor of Innovation of Bioengineering \& Electrical and Systems Engineering, University of Pennsylvania}
     \@contactsig{Supervisor Contact}{Brian Litt, M.D. \\ 301 Hayden Hall, University of Pennsylvania \\ 3320 Smith Walk, Philadelphia, PA 19104 \\ \href{mailto:littb@mail.med.upenn.edu}{littb@mail.med.upenn.edu}}
@@ -195,21 +187,12 @@
     \par \vskip .1in \footnotesize{\underline{#1}}
     \par \vskip .1in \footnotesize{#2}}\hfill}
 
-
-\def\@supervisorsig#1{\parbox[t][4cm][t]{7cm}{\parindent=0pt \vskip 0.25in
+\def\@mainsig#1#2{\parbox[t][4cm][t]{7cm}{\parindent=0pt \vskip 0.25in
   \flushright
   \par \vskip \baselineskip \hrule
-  \par \vskip .1in \footnotesize{#1}
+  \par \vskip .1in \footnotesize{#2}
   \vfill
-  \par \vskip .1in Supervisor of Dissertation}\hfill}
-
-
-\def\@chairpersonsig#1{\parbox[t][4cm][t]{7cm}{\parindent=0pt \vskip 0.25in
-  \flushright
-  \par \vskip \baselineskip \hrule
-  \par \vskip .1in \footnotesize{#1}
-  \vfill
-  \par \vskip .1in Graduate Group Chairperson}\hfill}
+  \par \vskip .1in {#1}}\hfill}
 
 
 % Do a sig line for each name in the list #1, with title #2
@@ -243,6 +226,15 @@
   \end{center}
   \vskip 10pt
   \par\noindent \@abstract }
+
+% The format of the specific aims heading
+\def\@aimspage{\addcontentsline{toc}{chapter}{Specific Aims}%
+  \begin{center}
+    {\large\bf SPECIFIC AIMS}
+  \end{center}
+  \vskip 10pt
+  \par\noindent \@aims }
+
 
 % The TOC Formatting
 \renewcommand*{\contentsname}{Table of Contents}
