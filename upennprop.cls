@@ -52,12 +52,12 @@
 % Latex Origin is 1''/1'', so measurements are relative to this.
 % Proposal Margins: 1in inside, outside, top, bottom
 
-\textwidth=6in
-\oddsidemargin=0.5in \evensidemargin=0.5in
-\topmargin=-0.5in
-\textheight=9in  % 9in must include page numbers
-\advance\textheight by -1\footskip \relax
-%\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+%\textwidth=6in
+%\oddsidemargin=0.5in \evensidemargin=0.5in
+%\topmargin=-0.5in
+%\textheight=9in  % 9in must include page numbers
+%\advance\textheight by -1\footskip \relax
+\usepackage[top=0.5in, bottom=0.5in, left=0.5in, right=0.5in]{geometry}
 
 \usepackage{setspace}
 %\doublespacing
@@ -172,7 +172,8 @@
     \@mainsig{\supervisorname}{Brian Litt \vskip 0.1in Professor of \\ Neurology \& Bioengineering}
     \@mainsig{\chairname}{Daniel A. Hammer \vskip 0.1in Alfred G. and Meta A. Ennis Professor of \\ Bioengineering \& Chemical and Biomolecular Engineering}
     \@narrowsig{Gershon Buchsbaum, Professor of Bioengineering, University of Pennsylvania \\
-                Danielle S. Bassett, Skirkanich Assistant Professor of Innovation of Bioengineering \& Electrical and Systems Engineering, University of Pennsylvania}
+                Danielle S. Bassett, Skirkanich Assistant Professor of Innovation of Bioengineering \& Electrical and Systems Engineering, University of Pennsylvania \\
+                Timothy H. Lucas, Assistant Professor of Neurosurgery, University of Pennsylvania School of Medicine}
     \@contactsig{Supervisor Contact}{Brian Litt, M.D. \\ 301 Hayden Hall, University of Pennsylvania \\ 3320 Smith Walk, Philadelphia, PA 19104 \\ \href{mailto:littb@mail.med.upenn.edu}{littb@mail.med.upenn.edu}}
     \@contactsig{Personal Contact}{Ankit Khambhati \\ 301 Hayden Hall, University of Pennsylvania \\ 3320 Smith Walk, Philadelphia, PA 19104 \\ \href{mailto:ankk@seas.upenn.edu}{ankk@seas.upenn.edu}}
 }
