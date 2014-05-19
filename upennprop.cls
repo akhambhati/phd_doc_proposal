@@ -173,7 +173,8 @@
     \@mainsig{\chairname}{Daniel A. Hammer \vskip 0.1in Alfred G. and Meta A. Ennis Professor of \\ Bioengineering \& Chemical and Biomolecular Engineering}
     \@narrowsig{Gershon Buchsbaum, Professor of Bioengineering, University of Pennsylvania \\
                 Danielle S. Bassett, Skirkanich Assistant Professor of Innovation of Bioengineering \& Electrical and Systems Engineering, University of Pennsylvania \\
-                Timothy H. Lucas, Assistant Professor of Neurosurgery, University of Pennsylvania School of Medicine}
+                Timothy H. Lucas, Assistant Professor of Neurosurgery, University of Pennsylvania School of Medicine \\
+                Tim Denison, Director of Core Technology, Medtronic Neuromodulation, Minneapolis}
     \@contactsig{Supervisor Contact}{Brian Litt, M.D. \\ 301 Hayden Hall, University of Pennsylvania \\ 3320 Smith Walk, Philadelphia, PA 19104 \\ \href{mailto:littb@mail.med.upenn.edu}{littb@mail.med.upenn.edu}}
     \@contactsig{Personal Contact}{Ankit Khambhati \\ 301 Hayden Hall, University of Pennsylvania \\ 3320 Smith Walk, Philadelphia, PA 19104 \\ \href{mailto:ankk@seas.upenn.edu}{ankk@seas.upenn.edu}}
 }
