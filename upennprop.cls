@@ -171,10 +171,10 @@
 \def\@signatureblock{\vskip 0pt plus 0.5 fill
     \@mainsig{\supervisorname}{Brian Litt \vskip 0.1in Professor of \\ Neurology \& Bioengineering}
     \@mainsig{\chairname}{Daniel A. Hammer \vskip 0.1in Alfred G. and Meta A. Ennis Professor of \\ Bioengineering \& Chemical and Biomolecular Engineering}
-    \@narrowsig{Gershon Buchsbaum, Professor of Bioengineering, University of Pennsylvania \\
-                Danielle S. Bassett, Skirkanich Assistant Professor of Innovation of Bioengineering \& Electrical and Systems Engineering, University of Pennsylvania \\
-                Timothy H. Lucas, Assistant Professor of Neurosurgery, University of Pennsylvania School of Medicine \\
-                Tim Denison, Director of Core Technology, Medtronic Neuromodulation, Minneapolis}
+    \@narrowsig{Gershon Buchsbaum, Professor of Bioengineering \\
+                Danielle S. Bassett, Skirkanich Assistant Professor of Innovation of Bioengineering \& Electrical and Systems Engineering \\
+                Timothy H. Lucas, Assistant Professor of Neurosurgery, Perelman School of Medicine \\
+                James C. Gee, Associate Professor of Radiologic Science, Perelman School of Medicine}
     \@contactsig{Supervisor Contact}{Brian Litt, M.D. \\ 301 Hayden Hall, University of Pennsylvania \\ 3320 Smith Walk, Philadelphia, PA 19104 \\ \href{mailto:littb@mail.med.upenn.edu}{littb@mail.med.upenn.edu}}
     \@contactsig{Personal Contact}{Ankit Khambhati \\ 301 Hayden Hall, University of Pennsylvania \\ 3320 Smith Walk, Philadelphia, PA 19104 \\ \href{mailto:ankk@seas.upenn.edu}{ankk@seas.upenn.edu}}
 }
