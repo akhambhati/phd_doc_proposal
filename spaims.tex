@@ -1,63 +1,65 @@
 % SPECIFIC AIMS -- PLACEHOLDER
-\setlist{nolistsep}
-Medically refractory epilepsy has traditionally been diagnosed and treated by localizing and surgically resecting cortical tissue comprising seizure "foci." Recent work explains poor seizure freedom post-surgery (~40\% in patients with nonlesional epilepsy) by re-defining epilepsy as a network disease with pathologic connectivity between cortical structures. These insights have spawned new implantable neuromodulation devices to control brain regions that generate seizures without removing them. In this research proposal I will address the following three questions critical for mapping epileptic networks and localizing connections to target with neuromodulation:
+Localization-related epilepsy accounts for $\approx$80\% of drug-resistant cases and is traditionally characterized by seizures that arise from one or more abnormal islands of cortical tissue, or `foci', in the neocortex or mesial temporal structures. For these patients the only treatment options are implantable neuromodulation devices, or more traditionally resective surgery. In surgical cases without discrete lesions on brain MRI associated with seizure generation (`foci') only $\approx$40\% remain seizure-free post-surgery. This modest outcome has lead investigators to further explore spatial distributions of epileptic activity to more accurately localize where seizures start and how their pathologic activity spreads. These approaches have spurred a paradigm shift from localizing epileptic ‘foci’ towards mapping the epileptic network and functional and structural architecture within it.
+
+While seizures are often described by their complex temporal dynamics, the functional and structural connections responsible for spatial interactions within the epileptogenic network remain elusive. Mapping network architecture can broadly impact theoretical understanding of seizure mechanisms and clinical therapy for managing seizures.
+Specifically, this thesis asks the following three overarching questions regarding epileptic network structure and function:
 \begin{enumerate}[topsep=1ex, itemsep=0pt]
-    \item How are dynamic functional connections in epileptic networks topologically organized?
-    \item To what extent can the epileptic network be mapped intraoperatively?
-    \item How do structural connections facilitate functional communication in epileptic networks?
+    \item Which functional connections play a role in the generation, propagation, and self-termination of seizures?
+    \item How does functional architecture reorganize over long-time scales in advance of seizures?
+    \item Is structural architecture predictive of functional organization in the epileptic network?
 \end{enumerate}
 
 %%% AIM 1
 \hangindent=6ex
 \noindent
-\bflin{Aim 1:} \textbf{Characterize dynamic functional interactions in naturally-occurring epileptic networks.}
+\bflin{Aim 1:} \textbf{Characterize dynamic functional connectivity within human epileptic networks during seizures.}
 
 \hangindent=6ex
-\textbf{Hypothesis:} Functional connections within the epileptic network reconfigure during epileptiform activity.
+\textbf{Hypothesis:} Dynamic functional connectivity within the epileptic network plays a mechanistic role in seizure generation, propagation and termination.
 
 \hangindent=6ex
-\textbf{Challenge:} To determine dynamic functional connectivity from intracranial recordings and classify and track this connectivity in order to understand time-dependent topological properties of epileptic networks.
+\textbf{Challenge:} To define the epileptic network from intracranial neural sensors and to classify and track functional connections within such network in patients of different etiology.
 
 \hangindent=6ex
-\textbf{Approach:} I will develop connectivity metrics to compare signals from intracranial neural sensors. I will also design algorithms to relate network configurations over time, augmenting existing dynamic network analysis methods.
+\textbf{Approach:} I will design algorithms to assess spatial and temporal structure as networks reconfigure through different states, augmenting existing dynamic network analysis methods.
 
 \hangindent=6ex
-\textbf{Impact:} These algorithms will help quantify the spatial involvement of distributed cortical structures during epileptiform events. Relating geometric space of sensors to epileptic network topology will also help determine which circuits to target with implantable neuromodulation devices.
+\textbf{Impact:} These algorithms will quantify dynamic spatial interactions within the epileptic network during events of interest, not limited to seizures. These methods will lead to novel research and clinical tools to dissect and visualize epileptic network connectivity.
 
 
 %%% AIM 2
 \hangindent=\parindent
 \hangafter=1
 \noindent
-\bflin{Aim 2:} \textbf{Determine how intraoperative functional connectivity relates to extraoperative functional connectivity during epileptiform events.}
+\bflin{Aim 2:} \textbf{Describe how functional architecture reorganizes over long time-scales in advance of seizure generation.}
 
 \hangindent=6ex
-\textbf{Hypothesis:} Functional connectivity based on intraoperative intracranial recordings can help map the epileptic network.
+\textbf{Hypothesis:} Seizures manifest as a result of inter-ictal degradation in functional integrity of the epileptic network.
 
 \hangindent=6ex
-\textbf{Challenge:} To investigate effects of anesthesia on functional connectivity and retrospectively characterize connections in intraoperative functional networks involved in epileptiform events.
+\textbf{Challenge:} To isolate functional domains of the epileptic network inter-ictally and to compare these domains between inter-ictal and ictal periods.
 
 \hangindent=6ex
-\textbf{Approach:} I will collect high-bandwidth intracranial recordings in the operating room under anesthesia types known to enhance epileptiform activity. I will adapt approaches developed in \bflin{Aim 1} to characterize functional connectivity in intraoperative epileptic networks and compare to extraoperative network configurations.
+\textbf{Approach:} I will adapt approaches developed in \bflin{Aim 1} and employ network clustering techniques to compare functional organization between network states.
 
 \hangindent=6ex
-\textbf{Impact:} These methods will yield relationships between connections present under extraoperative and intraoperative conditions. They can also inform online network classification methods to immediately map the epileptic network intraoperatively.
+\textbf{Impact:} These experiments will identify inter-ictal reorganization of functional architecture within an epileptic network known to be in an epileptogenic state hours in advance of the seizure. Inter-ictal functional organization can inform clinical mapping of the epileptic network and can augment existing seizure control paradigms for implantable devices.
 
 
 %%% AIM 3
 \hangindent=\parindent
 \hangafter=1
 \noindent
-\bflin{Aim 3:} \textbf{Localize structural white-matter architecture underlying functional communication in epileptic networks.}
+\bflin{Aim 3:} \textbf{Compare structural morphology between functional domains of the epileptic network.}
 
 \hangindent=6ex
-\textbf{Hypothesis:} Structural connectivity is predictive of spatial spread of pathologic epileptiform activity.
+\textbf{Hypothesis:} Persistent functional domains of the epileptic network can be predicted by structural imaging.
 
 \hangindent=6ex
-\textbf{Challenge:} To establish white-matter fiber connectivity between regions of interest within the epileptic network and determine which tracts propagate epileptic activity.
+\textbf{Challenge:} To identify persistent functional domains related to epileptic events and to identify the structural differences between these domains.
 
 \hangindent=6ex
-\textbf{Approach:} I will engineer imaging techniques to reconstruct and track fiber pathways that stem from intracranial sensor locations. I will then expand statistical algorithms developed in \bflin{Aim 1} to constrain functional relationships based on structural connections.
+\textbf{Approach:} I will employ network clustering techniques and functional domains isolated from \bflin{Aim 2} to determine persistent functional architecture with relevance to the epileptic network. I will use structural imaging modalities from epilepsy and control patients to identify within-group and between-group morphological characteristics of regions of interest.
 
 \hangindent=6ex
-\textbf{Impact:} These methods will help trace white-matter fiber pathways that are complicit in functional dynamics of epileptic events. They will help innovate new clinical interventions that prevent epileptiform activity from propagating to cortical structures critical to eloquent function.
+\textbf{Impact:} These studies will assess the utility of structural imaging to identify the epileptic network with the aid of functional domains known \textit{a priori}. Such mapping can be especially effective for epilepsy patients without discrete lesions.
