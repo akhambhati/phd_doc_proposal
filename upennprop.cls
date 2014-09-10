@@ -98,6 +98,10 @@
 
 \def\abstract#1{\def\@abstract{#1}}
 \def\aims#1{\def\@aims{#1}}
+\def\rssig#1{\def\@rssig{#1}}
+\def\rsinnov#1{\def\@rsinnov{#1}}
+\def\rsappr#1{\def\@rsappr{#1}}
+
 
 % Contrive to \include a file without starting a new page (by temporarily
 % disabling \clearpage).  A new page is still begun at the end of the include.
@@ -137,7 +141,7 @@
 % Start the regularly-numbered part of the dissertation.  Must be given
 % explicitly if \FrontMatter* was used.
 %
-\def\MainMatter{\newpage\pagenumbering{arabic}}
+\def\MainMatter{\newpage\newgeometry{top=0.5in, bottom=0.5in, left=1.0in, right=1.0in}\pagenumbering{arabic}}
 
 
 % \@titlepage is modular so that its parts can be redefined as necessary.
@@ -173,8 +177,7 @@
     \@mainsig{\chairname}{Daniel A. Hammer \vskip 0.1in Alfred G. and Meta A. Ennis Professor of \\ Bioengineering \& Chemical and Biomolecular Engineering}
     \@narrowsig{Gershon Buchsbaum, Professor of Bioengineering \\
                 Danielle S. Bassett, Skirkanich Assistant Professor of Innovation of Bioengineering \& Electrical and Systems Engineering \\
-                Timothy H. Lucas, Assistant Professor of Neurosurgery, Perelman School of Medicine \\
-                James C. Gee, Associate Professor of Radiologic Science, Perelman School of Medicine}
+    Timothy H. Lucas, Assistant Professor of Neurosurgery, Perelman School of Medicine}
     \@contactsig{Supervisor Contact}{Brian Litt, M.D. \\ 301 Hayden Hall, University of Pennsylvania \\ 3320 Smith Walk, Philadelphia, PA 19104 \\ \href{mailto:littb@mail.med.upenn.edu}{littb@mail.med.upenn.edu}}
     \@contactsig{Personal Contact}{Ankit Khambhati \\ 301 Hayden Hall, University of Pennsylvania \\ 3320 Smith Walk, Philadelphia, PA 19104 \\ \href{mailto:ankk@seas.upenn.edu}{ankk@seas.upenn.edu}}
 }
@@ -236,7 +239,6 @@
   \end{center}
   \vskip 10pt
   \par\noindent \@aims }
-
 
 % The TOC Formatting
 \renewcommand*{\contentsname}{Table of Contents}
