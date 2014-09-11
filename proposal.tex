@@ -6,6 +6,29 @@
 % Outline Template: 5/13/2014
 % Doc Text: 5/13/2014
 \documentclass[11pt]{upennprop}
+    \makeatletter
+    \def\@makechapterhead#1{%
+      \vspace*{20\p@}% %%% removed!
+      {\parindent \z@ \raggedright \normalfont
+        \ifnum \c@secnumdepth >\m@ne
+            \huge\bfseries \@chapapp\space \thechapter
+            \par\nobreak
+            \vskip 10\p@
+        \fi
+        \interlinepenalty\@M
+        \Huge \bfseries #1\par\nobreak
+        \vskip 40\p@
+      }}
+    \def\@makeschapterhead#1{%
+      \vspace*{20\p@}% %%% removed!
+      {\parindent \z@ \raggedright
+        \normalfont
+        \interlinepenalty\@M
+        \Huge \bfseries  #1\par\nobreak
+        \vskip 20\p@
+      }}
+    \makeatother
+
 
 \usepackage{natbib}
 
