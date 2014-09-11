@@ -141,7 +141,10 @@
 % Start the regularly-numbered part of the dissertation.  Must be given
 % explicitly if \FrontMatter* was used.
 %
-\def\MainMatter{\newpage\newgeometry{top=0.5in, bottom=0.5in, left=1.0in, right=1.0in}\pagenumbering{arabic}}
+\def\MainMatter{\newpage
+    \newgeometry{top=0.5in, bottom=0.5in, left=1.0in, right=1.0in}
+    \pagenumbering{arabic}
+}
 
 
 % \@titlepage is modular so that its parts can be redefined as necessary.
