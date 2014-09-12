@@ -8,19 +8,19 @@
 \documentclass[11pt]{upennprop}
     \makeatletter
     \def\@makechapterhead#1{%
-      \vspace*{20\p@}% %%% removed!
+      %%%\vspace*{20\p@}% %%% removed!
       {\parindent \z@ \raggedright \normalfont
         \ifnum \c@secnumdepth >\m@ne
             \huge\bfseries \@chapapp\space \thechapter
             \par\nobreak
-            \vskip 10\p@
+            \vskip 20\p@
         \fi
         \interlinepenalty\@M
         \Huge \bfseries #1\par\nobreak
-        \vskip 40\p@
+        \vskip 20\p@
       }}
     \def\@makeschapterhead#1{%
-      \vspace*{20\p@}% %%% removed!
+      %%%%\vspace*{20\p@}% %%% removed!
       {\parindent \z@ \raggedright
         \normalfont
         \interlinepenalty\@M
@@ -29,9 +29,9 @@
       }}
     \makeatother
 
+\renewcommand\thesection{\arabic{section}}
 
 \usepackage{natbib}
-
 
 \usepackage{graphicx}
 
@@ -63,6 +63,8 @@
 
 \chapter*{Research Strategy}
 \input{rssig}
+\input{rsinnov}
+
 
 \bibliographystyle{unsrt}
 \bibliography{references}
