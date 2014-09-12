@@ -129,6 +129,7 @@
   % The abstract and TOC are obligatory
   \@abstractpage \newpage \let\@abstract=\@undefined
   \@aimspage \newpage \let\@aimspage=\@undefined
+  \newgeometry{top=1.0in, bottom=1.0in, left=1.0in, right=1.0in}
   \tableofcontents
   \@ifundefined{pd@list@tables} \relax 
       \listoftables 
@@ -142,7 +143,6 @@
 % explicitly if \FrontMatter* was used.
 %
 \def\MainMatter{\newpage
-    \newgeometry{top=0.5in, bottom=0.5in, left=1.0in, right=1.0in}
     \pagenumbering{arabic}
 }
 
