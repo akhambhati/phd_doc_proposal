@@ -5,16 +5,34 @@ I ask the basic science question: how is the epileptic network organized in such
 This aim is important to the proposed project because it will isolate mechanistic roles for clinically-determined seizure onset areas and their interactions with adjacent cortex as the epileptic network undergoes dynamic functional alterations through seizures. This study expands basic science understanding of well-known temporal phenomena in seizures to the lesser-studied spatial domain.
 
 \subsubsection{Research Design}
-\begin{enumerate}
-    \item Seizure segments (EEC), pre-seizure segments
-\end{enumerate}
+To address this aim partial and secondarily generalized seizures from the patient population (see \ref{subsec:patients}) will be extracted using the IEEG Portal and MATLAB IEEG Toolbox. The seizure epoch will range the clinically-defined earliest electrographic change (EEC), believed to be the earliest dynamical change from background signal characteristics \cite{litt2001epileptic}, to the end of ictal flickering (prior to post-ictal quieting). The pre-seizure epoch will be used as a control signal and will span a duration equal to its associated seizure epoch and end at the EEC. Each epoch contains dynamics that transition between seizure initiation, spread or propagation, and termination. Described herein are steps I will pursue to study the functional mechanisms and connections that drive such dynamics.
+~\\
+~\\
 \textbf{Association Metrics:}
+To study spatial interactions within a network a common practice is to define the notion of a \textit{node} and a \textit{connection} \cite{bullmore2011brain}. The node represents the most basic functioning unit of a network and is dependent on the signal scale, whether it be at the scope of single neurons or their local populations. Meso-scale ECoG recordings limit the notion of a node to a single electrode contact (see \ref{subsec:elecdata}) that senses surface-level, local neuron populations \cite{buzsaki2012origin}. Connectivity, or interactions between neuron populations over sensors, can be quantified by an association metric.
+
+An association metric, whether a linear or non-linear measurement, is often justified based on a data-driven feature of what it means for nodes to be interacting or connected. Meso-scale temporal dynamics are often characterized by their rhythmic or oscillatory behavior over a range of clinically-relevant frequency bands and are known to play a major role in normal cognition \cite{buzsaki2006rhythms} and in diseases such as epilepsy \cite{uhlhaas2006neural, jiruska2012synchronization}. Interactions between nodes of this scale primarily fall into recruitment and isolation through rhythmic synchrony and desynchrony. Formally, network nodes that are connected (disconnected) are synchronized (desynchronized). (De)synchronization amongst network nodes can be described through linear association metrics such as cross-correlation among others \cite{pereda2005nonlinear}. I will use normalized cross-correlation (\ref{eqn:xcorr}) to relate nodal dynamics based on prior work showing the metric's neurophysiologic interpretability and efficiency in uncovering phase relationships \cite{schiff2005neuronal, kramer2010coalescence}. Normalized cross-correlation $\bs{\rho}$ between the signals of a pair of nodes $\mb{x}$ and $\mb{y}$ is defined by
+\begin{eqnarray}
+\label{eqn:xcorr}
+    \bs{\rho}_{\mb{xy}} = \underset{\tau}{\operatorname{argmax}}\:{\abs{\mathrm{E}[(\mb{x}(t) - \mu_{\mb{x}})(\mb{y}(t+\tau) - \mu_{\mb{y}})]}}
+\end{eqnarray}
+where $\tau$ is the time-shift between the signals and $\mu$ is the mean of the signal. $\bs{\rho}$ ranges between 0 and 1 corresponding to a connection weight between the nodes.
+
+The collection of all possible connection weights are stored in a symmetric, $\mb{N}$x$\mb{N}$ association matrix $\mb{A}$ where $\mb{N}$ is the number of nodes in the network with $\mfrac{\mb{N}(\mb{N}-1)}{2}$ unique connections. The fundamental goal of this aim is to identify and understand the dynamic topological relationships of these connections during seizures.
 ~\\
 ~\\
 \textbf{Null Connectivity:}
+A novel aspect of this work is studying weighted connectivity between nodes, unlike other studies which binarize connectivity based on single threshold values. Retaining connection strengths enables more discriminative power in assigning functional roles to specific connections \cite{bullmore2011brain}. This bonus does come with drawbacks that must be addressed to make meaning of the large number of connections in the network.
+
+Null connectivity models that inform which connections are statistically probable through multiple comparisons testing are necessary here \cite{bassett2013robust}. In this work the goal is to determine which associations appear to have high cross-correlation values by chance. I will first create a null distribution of $k$ surrogate association matrices $\widetilde{\mb{A}}_k$ based on association metric $\bs{\rho}$ through time-series bootstrapping methods such as random permutation, Fourier phase randomization, or amplitude-adjusted Fourier phase randomization \cite{bassett2013robust}. Fourier phase randomization (\ref{eqn:ftrand}) involves forward Fourier transform, randomly reassigning phase coefficients, and inverse Fourier transform.
+
+Second, based on $\mb{A}$ and $\widetilde{\mb{A}}$ I will calculate and store a two-tailed p-value for each possible connection in a symmetric, $\mb{N}$x$\mb{N}$ connection probability matrix $\mb{P}$. To retain significant connections over multiple hypotheses testing we will apply a false discovery rate method on $\mb{P}$ and zero-out non-significant connection entries in $\mb{A}$ \cite{benjamini2001control}. This final matrix, known as the adjacency matrix $\widehat{\mb{A}}$, is versatile in that it contains significant, upper-tailed strong and lower-tailed weak connections.
 ~\\
 ~\\
 \textbf{Dynamic Networks:}
+While the previous sections discussed basic network formulation, I will lay the groundwork for studying the epileptic network in the context that the network's functional connectivity changes with time as different neural populations are engaged as shown during cognitive tasks in healthy subjects \cite{bassett2011dynamic}. Such a perspective is novel in epilepsy and has not yet been examined in networks consisting of meso-scale architecture.
+
+-- discuss frequency dependency, time window length, stationarity, sampling temporal space for spikes 
 ~\\
 ~\\
 \textbf{Network Configuration:}
