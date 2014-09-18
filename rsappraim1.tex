@@ -30,9 +30,11 @@ Second, based on $\mb{A}$ and $\widetilde{\mb{A}}$ I will calculate and store a 
 ~\\
 ~\\
 \textbf{Dynamic Networks:}
-While the previous sections discussed basic network formulation, I will lay the groundwork for studying the epileptic network in the context that the network's functional connectivity changes with time as different neural populations are engaged as shown during cognitive tasks in healthy subjects \cite{bassett2011dynamic}. Such a perspective is novel in epilepsy and has not yet been examined in networks consisting of meso-scale architecture.
+I will lay the groundwork for studying the epileptic network in the context that functional connectivity changes with time as different neural populations are engaged as shown during cognitive tasks in healthy subjects \cite{bassett2011dynamic}. Such a perspective is novel in epilepsy and has not yet been examined in networks consisting of meso-scale architecture.
 
--- discuss frequency dependency, time window length, stationarity, sampling temporal space for spikes 
+Clinicians routinely describe frequency-dependent dynamics on a per sensor basis as seizures evolve, but there is little evidence as to how such dynamics behave spatially within the network. Under the assumption that band-specific neural activity may synchronize regions in the epileptic network, this recruitment during key phases of seizure evolution can provide critical insight to abnormal network structures. I will extend the definition of an epileptic network by re-defining the adjacency matrix as $\widehat{\mb{A}}(f)$ where $f$ is one of four clinically-relevant frequency bands (4-8, 8-13, 13-30, 30-100 Hz).
+
+In order to consider time-dependent connectivity I will divide signals into time-windows of a particular duration. Adding time-dependency modifies the adjacency matrix representation to $\widehat{\mb{A}}(t)$ where $t$ is a time-window. Studies suggest that one second of ECoG signal is weakly stationary \cite{kramer2010coalescence}. This approach will need to factor the number of cycles of frequency-dependent rhythmic activity within the chosen time-window.
 ~\\
 ~\\
 \textbf{Network Configuration:}
