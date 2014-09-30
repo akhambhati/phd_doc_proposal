@@ -1,25 +1,47 @@
 \subsection{Aim 2}
+\label{rsappr:aim2}
 In this section I extend the notion of an epileptic network more broadly to the inter-ictal period and ask: can topological abnormalities in the network that present during seizures be identified pre-ictally? I \textbf{hypothesize} that fundamental abnormalities in the functional wiring of epileptic networks can map seizure-generating areas during inter-ictal periods.
 
 \subsubsection{Justification}
 This aim takes an incremental step towards translating network-based approaches for objectively identifying topological abnormalities to practical clinical applications. The methodology developed here can be applied to ask a variety of questions regarding inter-ictal dynamics such as why sub-clinical events begin like seizures but don't evolve.
 
 \subsubsection{Research Design}
-\textbf{Association Metrics:}
-~\\
-~\\
-\textbf{Null Connectivity:}
-~\\
-~\\
-\textbf{Dynamic Networks:}
-~\\
-~\\
-\textbf{Network Configuration:}
-~\\
-~\\
-\textbf{Communities and Sub-Networks:}
-~\\
-~\\
-\textbf{Global and Local Architecture:}
+To verify that network abnormalities during seizures exist inter-ictally I propose to adapt existing network decomposition and unsupervised machine-learning techniques to (1) learn sub-network components of the epileptic network expressed during seizures phases and (2) retrospectively detect these sub-networks during inter-ictal periods. A sub-network is a subset of nodes and/or connections of the original network. This study assumes electrodes sampling the epileptic network cover a seizure-generating region and surround.  
 
+I will extract inter-ictal ECoG epochs associated with each pre-seizure/seizure epoch from Aim 1 (see \ref{rsappr:aim1}). I impose the criteria that an inter-ictal epoch begins at least 4 hours after any seizure and is 4 hours in duration leading to the start of the pre-seizure epoch. These constraints help ensure that (1) the epileptic network returns to `baseline' dynamics after a seizure and (2) that each seizure has an equal amount of inter-ictal `prediction' data considered. Seizure epochs associated with inter-ictal epochs outside of these constraints will be discarded from the analysis.
+~\\
+~\\
+\textbf{Sub-Network Detection:}
+Connections that frequently co-activate over a collection of networks are more likely to be in the same sub-network. I propose to learn and cluster connection co-activations into sub-networks using unsupervised machine learning algorithms. Prior work has identified sub-network baseline connectivity amongst brain regions from resting-state fMRI through unsupervised algorithms such as eigenanalysis \cite{leonardi2013principal} and matrix factorization \cite{eavani2013identifying,eavani2013unsupervised}. Both methods are mathematically appealing because learned sub-networks are also basis functions that reconstruct the original network when linearly combined. Eigenanalysis formulates sub-networks that cumulatively explain variance of the original network, but may have little physiologic interpretability \cite{ghanbari2013connectivity}. Non-negative matrix factorization (NMF) generates a naturally additive, sparse parts-based sub-network representation under the constraint that connectivities are strictly positive, but metrics to rank sub-networks based on importance are lacking \cite{ghanbari2013connectivity}. The latter approach provides an open-ended framework to describe the epileptic network in terms of seizure-generating sub-networks added to surrounding epileptogenic sub-network, however these methods require validation and reliability studies, which I lay forth below.
 
+I first formulate the training data matrix of observed network snapshots from which sub-networks will be derived. The connection vector $\vec{v}(f=f_1,t=t_{learn})$ describes all $N_{connects}$ network connection weights for fixed frequency-band $f_1$ during time-windows from a specified learning set $t_{learn}$ of size $T$. The collection of connection vectors within the learning set forms a training data matrix $\mb{V}_{learn}$ of size $T \times N_{connects}$. Connectivities of $\mb{V}_{learn}$ are non-negative based on the cross-correlation network association metric.
+
+Non-negative matrix factorization \cite{lee1999learning} of the non-negative training data matrix $\mb{V}_{learn}$ is approximated by two low-rank, non-negative matrices $\mb{W}$ with dimensions $T \times k$ and $\mb{H}$ with dimensions $k \times N_{connects}$ where $k$ represents the number of sub-network basis functions to extract constrained by $0<k<\min\left\{T, N_{connects}\right\}$ (Eqn. \ref{eqn:nmf}).
+\begin{eqnarray}
+    \label{eqn:nmf}
+    \mb{V}_{learn} \approx \mb{W}\mb{H}
+\end{eqnarray}
+The sub-network matrix $\mb{H}$ contains $k$ connectivity vectors corresponding to extracted sub-networks in its rows. The upregulation matrix $\mb{W}$ contains the relative basis weights of each of the $k$ sub-networks at $T$ time-windows and intuitively quantifies the degree activation or presence of each sub-network in a given time-window. 
+
+Due to the computational complexity of this optimization several groups have constrained the problem for various applications and many of these implementations have been added to the \textit{NIMFA} Python toolbox \cite{zitnik2012nimfa}. I will explore a sparse NMF algorithm based on alternating non-negativity-constrained least squares (SNMF) \cite{kim2007sparse}. Sparseness constraints have been shown to effectively disentangle dynamic functional connectivity into separate sub-networks \cite{leonardi2014disentangling}. This approach poses the following optimization problem:
+\begin{eqnarray}
+    \label{eqn:snmf}
+    \min_{\mb{W},\mb{H}} \mfrac{1}{2} \left\{\vecnorm{\mb{V}_{learn}-\mb{W}\mb{H}}^2_F + \eta\vecnorm{\mb{H}}^2_F +\beta\sum_{i=1}^{T}\vecnorm{W(i,\colon)}_1^2\right\}, \: s.t. \: \mb{W},\mb{H} \geq 0
+\end{eqnarray}
+that minimizes the Frobenius norm of the reconstruction error and imposes a regularization penalty $\eta>0$ to suppress $\vecnorm{H}_F^2$ and a sparsity penalty $\beta>0$ on the rows of $\mb{W}$ \cite{kim2007sparse}. Thus, the number of sub-networks $k$, the regularization $\eta$ and the upregulation sparsity $\beta$ will be optimized through model selection techniques explored in prior work \cite{brunet2004metagenes, kim2007sparse}. 
+~\\
+~\\
+\textbf{Bootstrapped Sub-Network Learning:}
+I will statistically compare inter-ictal and seizure sub-network topologies through bootstrap resampling techniques that help assess significance of extracted sub-networks. Bootstrapping is necessary because (1) the sub-network detection problem is biased towards inter-ictal epochs that occupy more of the sample space than than seizures, and (2) inter-ictal epochs spanning several hours contain many task-dependent states, and the working hypothesis of this aim is that network abnormalities are persistent over time. To address the former problem I will sample time-windows $t_{Sz}$ from the seizure epoch and randomly sample an equal number of time-windows $t_{interict}$ from the inter-ictal epoch such that $t_{learn}=\left\{t_{Sz}, t_{interict}\right\}$. To measure sub-network persistence I will apply sub-network detection on $\mb{V}_{learn}$ over $B$ runs, where each run will consist of newly resampled inter-ictal time-windows $t^{*}_{interict}$ that make up a new $t^{*}_{learn}=\left\{t_{Sz}, t^{*}_{interict}\right\}$.
+
+I will learn sub-networks from seizure and inter-ictal time-windows simultaneously, because the upregulation matrix provides a natural way of identifying which sub-networks are activated during each epoch. After each run of the NMF algorithm, I will assign accumulated sub-networks into groups based on structural similarity through methods such as the Hungarian algorithm \cite{munkres1957algorithms, kuhn2005hungarian} and stability clustering \cite{bellec2010multilevel}. This approach will accomplish: (1) natural clusters of sub-networks that can separate seizure-specific states from normal behavioral states, (2) relate seizure-specific sub-network topology to inter-ictal topology. Accomplishing these objectives will help answer the question whether abnormal epileptic network topology is detectable during inter-ictal periods. 
+
+\subsubsection{Preliminary Data}
+I applied this NMF sub-network detection method to one seizure epoch and its associated inter-ictal epoch in the gamma frequency band (30-100 Hz) using model parameters $k=5$, $\beta=0.1$, $\eta=(\max_{\mb{V}_{learn}})^2$, and $B=4$ runs (Fig. \ref{fig:nmf}A). For comparison, I also extracted sub-networks via. eigenanalysis for $k=5$ largest eigenvalues (Fig. \ref{fig:nmf}B). Unlike eigenanalysis sub-networks the NMF sub-networks are upregulated during temporal phases that have neurophysiologic relevance to seizure dynamics, similar to preliminary work from \textit{Aim 1}. These properties are important for extracting sub-network components, because they reveal meaningful, interpretable structure in the epileptic network. I will compare sub-network topology during inter-ictal and seizure epochs gathered from more algorithm runs to complete this aim. 
+
+\begin{figure}
+\centering
+\includegraphics[width=0.5\textwidth]{figs/panelNMF.eps}
+\caption[Epileptic Sub-Networks]{\textbf{Epileptic Sub-Network Detection.} (\textit{A}) Adjacency matrices and upregulation of five sub-networks extracted by NMF (columns) over four algorithm runs (rows). Adjacency matrix colors correspond to weak connectivity (blue) to strong connectivity (red). Upregulation periods left/right of vertical red line correspond to random inter-ictal/seizure epochs. (\textit{B}) Top five sub-networks with largest variance explained extracted by eigenanalysis.}
+\label{fig:nmf}
+\end{figure}
