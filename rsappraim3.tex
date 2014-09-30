@@ -1,25 +1,24 @@
 \subsection{Aim 3}
-While the first two aims of this thesis seek a formalized definition of the epileptic network, the final aim will address accuracy and specificity of a network-based approach to define surgical targets over a patient population with diverse etiology of neocortical epilepsy.
+While the first two aims of this thesis seek a formalized definition of the epileptic network and its organization during seizures and inter-ictal periods, the final aim will address accuracy and specificity of a network-based approach to define surgical targets over a patient population with diverse etiology of neocortical epilepsy.
 
 \subsubsection{Justification}
 A difficulty in treating neocortical epilepsy is an incomplete understanding of where seizures originate and the true extent of the epileptogenic network. This aim evaluates different components of the epileptic network as targets for resection based on outcome data. The results from this study may be used as preliminary data to prospectively determine surgical targets guided by epileptic network functional architecture.
 
 \subsubsection{Research Design}
-\textbf{Association Metrics:}
+To validate network-based approaches for mapping the epileptic network and identifying targets for therapy I propose retrospectively comparing surgical outcome to the overlap between the surgical resection zone and objectively identified network components. These network components can be, but are not limited to, outputs of detection methods from \textit{Aims 1 and 2}. I will accomplish this aim in four steps: 1) post-surgical imaging to determine which areas of the epileptic network were resected, 2) designing metrics to compare overlap between objectively identified targets and resection zone, 3) relating such metrics to Engel classification, and 4) evaluating seizure freedom potential with respect to different targets involved in seizure dynamics.
+\textbf{Localizing the Resection Zone:}
+The resection zone is often qualitatively described based on local brain anatomy as a part of clinical care, however the specific electrodes overlaid above these regions are not routinely recorded. Prior work has quantitatively identified the post-surgical resection zone through clinical notes and brain imaging for routine clinical care \cite{jacobs2010highfrequency, wu2010removing}. I will localize the resection zone in terms of the epileptic network nodes removed using the following imaging modalities: (1) pre-implant 3T T1-Weighted MP RAGE MRI for original brain anatomy before tissue resection, (2) post-implant head CT to localize electrodes on MRI, (3) post-resection 3T T1-Weighted MP RAGE MRI to localize resection cavity. To determine where electrodes were implanted with respect to brain anatomy, I will employ a co-registration technique developed in collaboration with our lab \cite{wu2012brain}.
+
+Pre-implant MRI is the most unaltered image from this set, and as such I will co-register post-implant CT and post-resection MRI into the pre-implant MRI space. Second, I will identify the resection cavity by visually comparing the co-registered post-resection MRI to the pre-implant MRI. Next, I will refer to clinical notes and brain cartoon representations to determine which specific electrodes on the co-registered post-implant CT correspond to the resection cavity. These electrodes represent nodes removed from the epileptic network.
+
+I will compute a target-resection index $I$ between the set of actual resected nodes $N_{resect}$ and the set of objectively determined targets $N_{target}$ as $I=\mfrac{N_{resect} \cap N_{target}}{\left\vert{N_{target}}\right\vert}$, where $0 \leq I \leq 1$ if no (or all) target nodes occupy the resection zone. A null reassignment index $I_{null}$ will also be computed by randomly permuting $N_{target}$ over all possible network nodes.
 ~\\
 ~\\
-\textbf{Null Connectivity:}
+\textbf{Quantifying Freedom Capability of Candidate Targets:}
+Post-surgical seizure outcome is ranked amongst four classes (1-4; 1 indicating seizure freedom, and 4 indicating no improvement) according to Engel's classification \cite{engel1993update} as a part of routine clinical follow-up. I will compare the target-resection index, a continuous variable, to Engel classification score, a discrete categorical variable, through logistic regression model. Negative correlation between these variables is favorable, indicating the target was in the resection zone (high $I$) and led to low Engel score. I will compute a goodness-of-fit of the logistic model for real $I$ and reassigned $I_null$ to test results for significance.
 ~\\
 ~\\
-\textbf{Dynamic Networks:}
-~\\
-~\\
-\textbf{Network Configuration:}
-~\\
-~\\
-\textbf{Communities and Sub-Networks:}
-~\\
-~\\
-\textbf{Global and Local Architecture:}
+\textbf{Determining Optimal Epileptic Network Targets:}
+While the aforementioned approach is generalizable for any objectively identified target, I will assess abnormal network components extracted from \textit{Aims 1 and 2} as viable surgical targets. Currently, resection targets underlie electrodes where clinicians believes seizures begin. However, studies show that dynamics secondary to seizure onset, outside of the seizure onset region, are correlated with surgical outcome \cite{kutsy1999ictal}. This suggests that abnormal network structures that present during different phases of the seizure may be suitable targets. I will explore this hypothesis in lesional (more favorable) and non-lesional (less favorable) neocortical patients.
 
 
