@@ -9,3 +9,7 @@
 *.blg
 *.lof
 *.lot
+*.png
+*.eps
+*.svg
+
