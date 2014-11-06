@@ -177,8 +177,8 @@
 % Example:
 \def\@signatureblock{\vskip 0pt plus 0.5 fill
     \@mainsig{\supervisorname}{Brian Litt \vskip 0.1in Professor of \\ Neurology \& Bioengineering}
-    \@mainsig{\chairname}{Daniel A. Hammer \vskip 0.1in Alfred G. and Meta A. Ennis Professor of \\ Bioengineering \& Chemical and Biomolecular Engineering}
-    \@narrowsig{Gershon Buchsbaum, Professor of Bioengineering \\
+    \@mainsig{\chairname}{Jason Burdick \vskip 0.1in Professor of \\ Bioengineering}
+    \@narrowsig{Daniel D. Lee, Professor of Electrical and Systems Engineering \& Computer and Information Science \\
                 Danielle S. Bassett, Skirkanich Assistant Professor of Innovation of Bioengineering \& Electrical and Systems Engineering \\
     Timothy H. Lucas, Assistant Professor of Neurosurgery, Perelman School of Medicine}
     \@contactsig{Supervisor Contact}{Brian Litt, M.D. \\ 301 Hayden Hall, University of Pennsylvania \\ 3320 Smith Walk, Philadelphia, PA 19104 \\ \href{mailto:littb@mail.med.upenn.edu}{littb@mail.med.upenn.edu}}
